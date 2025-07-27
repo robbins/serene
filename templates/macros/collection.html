@@ -7,7 +7,11 @@
     </div>
     {% endif %}
     {% if item.link %}
-    <a class="title" href="{{ item.link }}" target="_blank" rel="noreferrer noopener">{{ item.title }}</a>
+      {% set is_internal = item.link is starting_with("/") or item.link is matching("^[a-zA-Z0-9_/.-]+$") %}
+    <a class="title" href="{{ item.link }}"
+      {% if not is_internal %}target="_blank" rel="noreferrer noopener"{% endif %}>
+      {{ item.title }}
+    </a>
     {% else %}
     <div class="title">{{ item.title }}</div>
     {% endif %}
