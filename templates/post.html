@@ -80,7 +80,8 @@
     {% endif %}
   </aside>
   <main>
-    {{ macros::back_link(path = get_url(path=section.path)) }}
+    {% set parent_section = get_section(path=page.ancestors | last) %}
+    {{ macros::back_link(path = get_url(path=parent_section.path)) }}
 
     <div>
       {% if page.extra.copy is defined %}{% set allow_copy = page.extra.copy %}{% else %}{% set allow_copy = section.extra.copy %}{% endif %}
